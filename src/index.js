@@ -8,6 +8,7 @@ import db from "./utils/db.js";
 // create instance
 const server = Fastify({
   logger: true,
+  pluginTimeout: 20000,
 });
 
 async function start() {

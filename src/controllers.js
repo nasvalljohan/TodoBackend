@@ -33,7 +33,20 @@ export async function DeleteTodosController(request, response) {
 
     response.status(201);
 
-    return { success: true, message: "Todo created" };
+    return { success: true, message: "Todo deleted" };
+  } catch (error) {
+    response.log.error(error);
+    await response.status(500).send("Error occurred!!");
+  }
+}
+
+export async function EditTodosController(request, response) {
+  try {
+    const { Todo } = request.db.models;
+    await Todo.updateOne({
+      title: request.body.title,
+    });
+    response.status(201);
   } catch (error) {
     response.log.error(error);
     await response.status(500).send("Error occurred!!");
